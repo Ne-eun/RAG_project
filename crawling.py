@@ -24,7 +24,7 @@ def get_driver():
     return driver
 
 
-def get_row_per_page():
+def get_row_per_page(driver):
     page = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.ID, "contentBody"))
     )
@@ -47,10 +47,9 @@ def get_row_per_page():
         json.dump(data, f, indent=4)
 
 
-if __name__ == "__main__":
+def run_crawling():
+    driver = get_driver()
     try:
-        driver = get_driver()
-
         # 형사법 페이지 이동 / 예정법령은 제외
         driver.find_element(By.ID, "liLsFd").find_element(By.XPATH, "parent::a").click()
         time.sleep(2)
@@ -84,7 +83,7 @@ if __name__ == "__main__":
                         break
 
                 # 데이터 추출
-                get_row_per_page()
+                get_row_per_page(driver)
 
                 # 팝업 닫기 및 메인 창 복귀
                 driver.close()
@@ -99,3 +98,7 @@ if __name__ == "__main__":
             time.sleep(5)
     finally:
         driver.close()
+
+
+if __name__ == "__main__":
+    run_crawling()

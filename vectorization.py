@@ -71,6 +71,10 @@ def save_document(docs):
     init_payload()
 
 
-if __name__ == "__main__":
+def run_vectorization():
     docs = make_document_from_data()
     save_document(docs)
+
+
+if __name__ == "__main__":
+    run_vectorization()
