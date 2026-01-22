@@ -2,8 +2,8 @@ import os
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.runnables import RunnablePassthrough, RunnableLambda
-from langchain_core.output_parsers import StrOutputParser, JsonOutputParser
+from langchain_core.runnables import RunnablePassthrough
+from langchain_core.output_parsers import StrOutputParser
 from stores import get_vector_store
 
 load_dotenv()
@@ -11,7 +11,7 @@ load_dotenv()
 
 def get_retriever():
     vector_store = get_vector_store()
-    return vector_store.as_retriever(search_kwargs={"k": 5})
+    return vector_store.as_retriever(search_kwargs={"k": 3})
 
 
 def get_chain():
